@@ -1,6 +1,4 @@
-# Project Title
-
-Linear scaling reveals low-dimensional structure in observable microbial dynamics
+# Linear scaling reveals low-dimensional structure in observable microbial dynamics
 
 ## Authors
 
@@ -23,9 +21,11 @@ This repository/archive contains the following components:
 
 ### Requirements
 
-See the `requirements.txt` file for virtual environment requirement.
+See the `requirements.txt` file for virtual environment requirement for Jupyter notebooks.
 
-For the full dataset and trained models, please refer to Zenodo: 10.5281/zenodo.15659948
+Use Matlab R2023a for bounded gLV and dispersal gLV simulations, Matlab R2020a for microbial patch simulations.
+
+For the full dataset and trained models, please refer to https://doi.org/10.5281/zenodo.15659948
 
 ### Running the Code
 
