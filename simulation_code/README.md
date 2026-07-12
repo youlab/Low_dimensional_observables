@@ -25,7 +25,9 @@ Systems **not** listed here have no MATLAB generator by design:
 ## Notes
 - **`bounded gLV/gen_para.m`**: the `save(...)` call (line 94) is commented out — uncomment
   it to re-emit the `bounded_O*_I*.mat` parameter files. `gen_para_10_mem.m` saves normally.
-- `consumer resource/lib/` holds the shared MiCRM routines used by `gen_data_mcrm.m`.
+- `consumer resource/lib/` holds the shared MiCRM routines used by `gen_data_mcrm.m`;
+  this library is based on the `mcrm` model by J. Goldford
+  (https://github.com/jgoldford/mcrm) — see `consumer resource/README.md`.
 - `patchy dynamics/sgLV_v04a.m` writes many intermediate `.mat` (Cini, muVec,
   speciesAssignments, colormaps) into its `initialization/` folder during a run.
 - Requires MATLAB for the `.m` families; the plasmid generator (`parallel_pcf.ipynb`) runs

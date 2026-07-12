@@ -1,3 +1,5 @@
+% MiCRM library based on: https://github.com/jgoldford/mcrm (J. Goldford)
+% See ./README.md for attribution.
 close all; clear all;
 index = 1;
 rng(index+45);
