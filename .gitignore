@@ -50,3 +50,12 @@ slurm_outputs/
 
 # Raw generator example data -> Zenodo (simulation_code_rawdata.tar.gz)
 simulation_code/network sparsity/random_init.txt
+
+# ============================================================================
+#  bgLV in-repo training example (I1 / T2 / random, trial 1) — kept in git so
+#  `train_bgLV_simulations.py 1 100 2 random 1` runs end-to-end without Zenodo.
+#  (Negations come after all ignore rules above, so they win.)
+# ============================================================================
+!simulations/VAE_gLV_simulation/saved_sims/bgLV/I1/bgLV_B98_T2_random_train.npy
+!simulations/VAE_gLV_simulation/saved_sims/bgLV/I1/bgLV_B98_T2_random_test.npy
+!simulations/VAE_gLV_simulation/vae_models/bgLV/I1/random_B98_T2_E*_trial1.pth

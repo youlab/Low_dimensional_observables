@@ -18,7 +18,11 @@ cd "$REPO_ROOT"
 OUT="zenodo/archives"
 mkdir -p "$OUT"
 
-EXCLUDES=(--exclude='*.mat' --exclude='*.pkl' --exclude='*_traindoc.pth')
+EXCLUDES=(--exclude='*.mat' --exclude='*.pkl' --exclude='*_traindoc.pth'
+  # the bgLV I1/T2/random trial-1 example is shipped in git, not on Zenodo:
+  --exclude='simulations/VAE_gLV_simulation/saved_sims/bgLV/I1/bgLV_B98_T2_random_train.npy'
+  --exclude='simulations/VAE_gLV_simulation/saved_sims/bgLV/I1/bgLV_B98_T2_random_test.npy'
+  --exclude='simulations/VAE_gLV_simulation/vae_models/bgLV/I1/random_B98_T2_E*_trial1.pth')
 
 # tarball_name  <TAB>  space-separated source paths (repo-relative)
 read -r -d '' GROUPS <<'EOF' || true

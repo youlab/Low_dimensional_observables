@@ -2,6 +2,20 @@
 
 The main validation system. Communities of background + target species evolve under gLV dynamics; a VAE learns the minimal embedding that reconstructs the target trajectories, giving the effective number of observables Eᴄ as a function of community size.
 
+## Quickstart (runnable from a fresh clone, no download)
+One bgLV example — **index 1, target size 2, `random`, trial 1** — is shipped in the repo
+(`saved_sims/bgLV/I1/bgLV_B98_T2_random_{train,test}.npy` + the trial-1 models in
+`vae_models/bgLV/I1/`). Train the embedding sweep for it with:
+```bash
+python train_bgLV_simulations.py 1 100 2 random 1
+#                                 │  │  │  │      └ trial
+#                                 │  │  │  └ sim_type
+#                                 │  │  └ n_target
+#                                 │  └ n_ori (community size)
+#                                 └ model_index
+```
+Every other configuration's data/models are on Zenodo (see below).
+
 ## Model
 `VAE_model.py` (plus `VAE_model_4conv_64channels.py`, `MLP_VAE_*.py`, `VAE_CDS.py` variants).
 
@@ -12,7 +26,8 @@ The main validation system. Communities of background + target species evolve un
 
 ## Data
 - **On Zenodo** (restore with `bash ../../zenodo/zenodo_download.sh <DOI>`; see [`../../DATA.md`](../../DATA.md)): `vae_models/`, `mlp_models/`, `saved_sims/`, `mlpvae_reconstruction/`
-- **In this repo** (needed to reproduce the figures without a download): `saved_data/` (reconstruction/FUV caches), `.mat`/`.pkl` generation params
+- **In this repo**: `saved_data/` (reconstruction/FUV caches), `.mat`/`.pkl` generation
+  params, and the **I1/T2/random trial-1 bgLV example** (data + models) for the Quickstart.
 
 Notebook outputs are kept, so the published figures are visible without rerunning.
 Figure-saving (`savefig`) is disabled for the release; plots still render inline.
