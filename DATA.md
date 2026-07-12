@@ -34,7 +34,7 @@ folder its notebook/script expects.
 | `lab_microbiome_models.tar.gz` | `experiments/lab_microbiome/{vae_models_CV,mlp_models}/` | CV VAE weights + collapse MLP weights |
 | `lab_microbiome_datasets_CV.tar.gz` | `experiments/lab_microbiome/lab_microbiome_datasets_CV/` | CV datasets (1.3 GB) |
 | `vaginal_microbiome.tar.gz` | `experiments/vaginal_microbiome/{vae_models_CV,vaginal_dataset_CV}/` | CV weights + datasets |
-| `experimental_target.tar.gz` | `experiments/experimental_target_population/{vae_models,mlp_models}/` | FP-population model weights |
+| `experimental_target.tar.gz` | `experiments/Keio_community/{vae_models,mlp_models}/` | FP-population model weights |
 
 Checksums for every tarball are in `SHA256SUMS` (uploaded alongside the archives and
 verified automatically by `zenodo_download.sh`).

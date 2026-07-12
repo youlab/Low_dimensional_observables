@@ -33,7 +33,7 @@ short_sequence	simulations/short_sequence/vae_models
 lab_microbiome_models	experiments/lab_microbiome/vae_models_CV experiments/lab_microbiome/mlp_models
 lab_microbiome_datasets_CV	experiments/lab_microbiome/lab_microbiome_datasets_CV
 vaginal_microbiome	experiments/vaginal_microbiome/vae_models_CV experiments/vaginal_microbiome/vaginal_dataset_CV
-experimental_target	experiments/experimental_target_population/vae_models experiments/experimental_target_population/mlp_models
+experimental_target	experiments/Keio_community/vae_models experiments/Keio_community/mlp_models
 EOF
 
 : > "$OUT/SHA256SUMS"

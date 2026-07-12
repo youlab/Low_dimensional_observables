@@ -25,7 +25,8 @@ benchmarks/
 experiments/          # real measured communities
 ├── lab_microbiome/        soil & water lab communities (cross-validated)
 ├── vaginal_microbiome/    24-subject vaginal microbiome time series
-└── experimental_target_population/  engineered fluorescent-protein populations
+└── Keio_community/        engineered fluorescent-protein populations (Keio strains)
+simulation_code/      # MATLAB/Python generators for the synthetic dynamics (see its README)
 ```
 
 Each system folder has its own `README.md` with the exact run order.
@@ -64,7 +65,7 @@ are archived on Zenodo** — see [`DATA.md`](DATA.md).
 | `benchmarks/benchmark` | architecture study | VAE variants vs. AE / transformer baselines |
 | `experiments/lab_microbiome` | soil & water communities | E꜀ (CV), collapse prediction, community-shift & OLS forecasting |
 | `experiments/vaginal_microbiome` | vaginal microbiome | E꜀ across 24 subjects |
-| `experiments/experimental_target_population` | engineered FP populations | E꜀ of measured growth dynamics |
+| `experiments/Keio_community` | engineered FP populations (Keio strains) | E꜀ of measured growth dynamics |
 
 > _Fill in the manuscript figure numbers for each row before release._
 
