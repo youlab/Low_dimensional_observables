@@ -1,0 +1,49 @@
+# ============================================================================
+#  Heavy artifacts — archived on Zenodo, NOT committed (see DATA.md).
+#  These rules are the exact complement of what zenodo/make_archives.sh bundles.
+# ============================================================================
+
+# Trained model weights (state_dicts)
+*.pth
+# ...but keep the tiny loss-doc arrays that kept notebooks read, and reserve a slot
+# for a small sample model to be whitelisted later (deferred bgLV example):
+!*_traindoc.pth
+# !simulations/VAE_gLV_simulation/vae_models/<sample>.pth   # add when example is integrated
+
+# Simulation trajectory arrays (the small .mat / .pkl generation params in these
+# folders are deliberately NOT matched here, so they stay tracked for provenance).
+# NOTE: only saved_sims/ is ignored — the small reconstruction/FUV .txt caches in
+# saved_data/ are kept in-repo so the Summary figures reproduce without a download.
+**/saved_sims/**/*.npy
+**/saved_sims/**/*.npz
+**/saved_sims/**/*.txt
+**/saved_sims/**/*.csv
+
+# Reconstruction arrays
+**/mlpvae_reconstruction/
+
+# Large cross-validation datasets (>100 MB; the small *_embedding_FUV_CV caches stay)
+experiments/lab_microbiome/lab_microbiome_datasets_CV/
+experiments/vaginal_microbiome/vaginal_dataset_CV/
+
+# Local Zenodo staging tarballs
+zenodo/archives/
+
+# ============================================================================
+#  Removed for the release (figures + abandoned loss curves) — keep them out
+# ============================================================================
+*.png
+*.pdf
+figures/
+*_traindoc.pkl
+
+# ============================================================================
+#  Caches / OS / scheduler cruft
+# ============================================================================
+__pycache__/
+*.py[cod]
+.DS_Store
+.ipynb_checkpoints/
+slurm-*.out
+slurm_outputs/
+.nb_backup_ridge

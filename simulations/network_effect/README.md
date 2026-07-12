@@ -1,0 +1,18 @@
+# Interaction-network effects
+
+gLV communities with structured interaction networks. Measures how network topology shapes the effective observable dimension.
+
+## Model
+`VAE_model.py`
+
+## Run order
+1. `Train_test_split.ipynb` — build splits from the network `.mat` models.
+2. `train_network_gLVs.py` / `train_indiv_target.py` — train VAEs (`batchtrain_I2-5.sh`, `batchtrain_I6-8.sh`, `target*_batchtrain.sh`).
+3. `Summary_network_effects.ipynb` — figures. Reads a bgLV reference from `../VAE_gLV_simulation/`.
+
+## Data
+- **On Zenodo** (restore with `bash ../../zenodo/zenodo_download.sh <DOI>`; see [`../../DATA.md`](../../DATA.md)): `vae_models/`, `saved_sims/*.npy`
+- **In this repo** (needed to reproduce the figures without a download): `saved_data/`, `bounded_O100_I*.mat` network params
+
+Notebook outputs are kept, so the published figures are visible without rerunning.
+Figure-saving (`savefig`) is disabled for the release; plots still render inline.

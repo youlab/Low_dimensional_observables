@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(/hpc/group/youlab/zz294/miniconda3/envs/replicator/bin/python _make_summary_pdf.py)",
+      "Bash(python3 -)"
+    ]
+  }
+}

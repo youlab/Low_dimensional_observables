@@ -1,0 +1,18 @@
+# Consumer-resource (MiCRM) simulations
+
+MacArthur consumer-resource dynamics. Tests whether resource-mediated interactions change the effective observable dimension.
+
+## Model
+`VAE_model.py`
+
+## Run order
+1. `data_process.ipynb` — build the simulation datasets.
+2. `train_mcrm.py` — train the VAE sweep (`mcrm_species.sh`, `mcrm_resource.sh`).
+3. `Summary_VAE_mcrm.ipynb` — FUV / Eᴄ figures.
+
+## Data
+- **On Zenodo** (restore with `bash ../../zenodo/zenodo_download.sh <DOI>`; see [`../../DATA.md`](../../DATA.md)): `vae_models/`, `saved_sims/`
+- **In this repo** (needed to reproduce the figures without a download): `saved_data/`, `.mat` params (`inits.mat`, `params.mat`)
+
+Notebook outputs are kept, so the published figures are visible without rerunning.
+Figure-saving (`savefig`) is disabled for the release; plots still render inline.

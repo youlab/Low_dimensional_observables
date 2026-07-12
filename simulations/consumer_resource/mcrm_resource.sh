@@ -1,0 +1,35 @@
+#!/bin/bash
+#SBATCH -p youlab-gpu
+#SBATCH --ntasks=10                # 10 jobs running at once
+#SBATCH --gpus-per-task=1         # each job gets 1 GPU
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=8G
+
+set -euo pipefail
+
+# Load environment
+source /hpc/group/youlab/zz294/miniconda3/etc/profile.d/conda.sh
+conda activate myenv
+
+mkdir -p ./slurm_outputs
+
+VAR="resource"
+
+for MODEL in 1 2 3; do
+  echo "--- MODEL ${MODEL} ---"
+  for TRIAL in 1 2 3 4 5; do
+    echo "=== TRIAL ${TRIAL} ==="
+    for NT in 1 2 3 4 5 6 7 8 9 10; do
+      echo "--- NT ${NT} ---"
+      srun --ntasks=1 \
+           --gpus-per-task=1 \
+           --cpus-per-task=1 \
+           --output="./slurm_outputs/mcrm_${VAR}_M${MODEL}_NT${NT}_T${TRIAL}.out" \
+           --error="./slurm_outputs/mcrm_${VAR}_M${MODEL}_NT${NT}_T${TRIAL}.err" \
+           python -u train_mcrm.py "${VAR}" "${NT}" "${MODEL}" "${TRIAL}" &
+
+    done
+
+    wait
+  done
+done

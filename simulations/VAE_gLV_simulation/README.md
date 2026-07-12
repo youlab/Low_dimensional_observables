@@ -1,0 +1,18 @@
+# Generalized Lotka–Volterra (gLV) simulations
+
+The main validation system. Communities of background + target species evolve under gLV dynamics; a VAE learns the minimal embedding that reconstructs the target trajectories, giving the effective number of observables Eᴄ as a function of community size.
+
+## Model
+`VAE_model.py` (plus `VAE_model_4conv_64channels.py`, `MLP_VAE_*.py`, `VAE_CDS.py` variants).
+
+## Run order
+1. `train_bgLV_simulations.py <model_index> <n_ori> <n_target> <sim_type> <trial>` — train VAEs over the embedding-dimension sweep (variants: `train_dgLV_*`, `train_sgLV_*`, `train_pgLV_*`, `train_bgLV_10member.py`, `Train_gLV_CDS.py`).
+2. `Train_test_split.ipynb` — documents the deterministic 80/20 split (`random_state=42`) used to build `saved_sims/`.
+3. `Summary_VAE_expfit.ipynb` — reconstruction / FUV / Eᴄ figures (reads `saved_data/` caches).
+
+## Data
+- **On Zenodo** (restore with `bash ../../zenodo/zenodo_download.sh <DOI>`; see [`../../DATA.md`](../../DATA.md)): `vae_models/`, `mlp_models/`, `saved_sims/`, `mlpvae_reconstruction/`
+- **In this repo** (needed to reproduce the figures without a download): `saved_data/` (reconstruction/FUV caches), `.mat`/`.pkl` generation params
+
+Notebook outputs are kept, so the published figures are visible without rerunning.
+Figure-saving (`savefig`) is disabled for the release; plots still render inline.
