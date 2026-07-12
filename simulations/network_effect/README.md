@@ -7,7 +7,7 @@ gLV communities with structured interaction networks. Measures how network topol
 
 ## Run order
 1. `Train_test_split.ipynb` — build splits from the network `.mat` models.
-2. `train_network_gLVs.py` / `train_indiv_target.py` — train VAEs (`batchtrain_I2-5.sh`, `batchtrain_I6-8.sh`, `target*_batchtrain.sh`).
+2. `train_network_gLVs.py` — train VAEs (`batchtrain_I2-5.sh`, `batchtrain_I6-8.sh`).
 3. `Summary_network_effects.ipynb` — figures. Reads a bgLV reference from `../VAE_gLV_simulation/`.
 
 ## Data

@@ -29,6 +29,9 @@ experiments/vaginal_microbiome/vaginal_dataset_CV/
 # Local Zenodo staging tarballs
 zenodo/archives/
 
+# Local-only archive of deprecated/superseded material (not part of the release)
+archive/
+
 # ============================================================================
 #  Removed for the release (figures + abandoned loss curves) — keep them out
 # ============================================================================
