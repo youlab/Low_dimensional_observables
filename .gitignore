@@ -47,3 +47,6 @@ __pycache__/
 slurm-*.out
 slurm_outputs/
 .nb_backup_ridge
+
+# Raw generator example data -> Zenodo (simulation_code_rawdata.tar.gz)
+simulation_code/network sparsity/random_init.txt

@@ -49,6 +49,16 @@ while IFS=$'\t' read -r name paths; do
   ( cd "$OUT" && sha256sum "${name}.tar.gz" >> "SHA256SUMS" )
 done <<< "$GROUPS"
 
+# Raw generator data whose paths contain spaces (handled explicitly, outside the
+# word-split GROUPS loop above).
+RAWDATA=("simulation_code/network sparsity/random_init.txt")
+present=(); for p in "${RAWDATA[@]}"; do [ -e "$p" ] && present+=("$p"); done
+if [ ${#present[@]} -gt 0 ]; then
+  echo "==> $OUT/simulation_code_rawdata.tar.gz  <=  ${present[*]}"
+  tar -czf "$OUT/simulation_code_rawdata.tar.gz" "${present[@]}"
+  ( cd "$OUT" && sha256sum "simulation_code_rawdata.tar.gz" >> "SHA256SUMS" )
+fi
+
 echo
 echo "Done. Archives in $OUT/"
 du -sh "$OUT"/*.tar.gz
