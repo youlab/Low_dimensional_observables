@@ -86,6 +86,6 @@ fig.legend(loc='center right', bbox_to_anchor=(1, 0.5), fontsize=18,
 
 #ax.set_ylabel('diversity',fontsize=16)
 fig.subplots_adjust(left=0.1,right=0.86,bottom=0.12,top=0.95)  # make room for the legend
-# fig.savefig("./figures/community_composition.png",dpi=300)  # figure-saving disabled for release
-# fig.savefig("./figures/community_composition.svg",dpi=300)  # figure-saving disabled for release
+fig.savefig("./figures/community_composition.png",dpi=300)
+fig.savefig("./figures/community_composition.svg",dpi=300)
 plt.show()
