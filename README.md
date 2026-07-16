@@ -1,5 +1,7 @@
 # Low-dimensional observables of ecological dynamics
 
+2026/07 release: DOI: 10.5281/zenodo.21386383
+
 Code and analysis notebooks for learning **low-dimensional observables of ecological and
 microbial community dynamics with variational autoencoders (VAEs)**. A VAE is trained to
 compress high-dimensional community trajectories into a small latent embedding; the
