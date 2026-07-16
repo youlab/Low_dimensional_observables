@@ -28,6 +28,8 @@ Systems **not** listed here have no MATLAB generator by design:
 - `consumer resource/lib/` holds the shared MiCRM routines used by `gen_data_mcrm.m`;
   this library is based on the `mcrm` model by J. Goldford
   (https://github.com/jgoldford/mcrm) — see `consumer resource/README.md`.
+- `dispersal_gLV/` used the model by J. Hu et al.
+(https://github.com/Jiliang-Hu/Emergent-phases).
 - `patchy dynamics/sgLV_v04a.m` writes many intermediate `.mat` (Cini, muVec,
   speciesAssignments, colormaps) into its `initialization/` folder during a run.
 - Requires MATLAB for the `.m` families; the plasmid generator (`parallel_pcf.ipynb`) runs
