@@ -4,7 +4,7 @@ Code and analysis notebooks for learning **low-dimensional observables of ecolog
 microbial community dynamics with variational autoencoders (VAEs)**. A VAE is trained to
 compress high-dimensional community trajectories into a small latent embedding; the
 minimum embedding dimension that reconstructs the dynamics (measured by the fraction of
-unexplained variance, **FUV**) is the effective number of observables — the *E꜀* — of the
+unexplained variance, **FUV**) is the effective number of observables — the *Ec* — of the
 system.
 
 This repository accompanies the manuscript and reproduces every figure. It is organized as
@@ -57,15 +57,15 @@ are archived on Zenodo** — see [`DATA.md`](DATA.md).
 
 | Folder | System | Produces |
 |---|---|---|
-| `simulations/VAE_gLV_simulation` | generalized Lotka–Volterra | E꜀ vs. community size; embedding-dimension scaling (main validation) |
-| `simulations/consumer_resource` | consumer-resource (MiCRM) | E꜀ for resource-mediated dynamics |
-| `simulations/stochastic_logistic` | stochastic logistic | E꜀ under intrinsic noise |
-| `simulations/network_effect` | interaction networks | dependence of E꜀ on network structure |
+| `simulations/VAE_gLV_simulation` | generalized Lotka–Volterra | Ec vs. community size; embedding-dimension scaling (main validation) |
+| `simulations/consumer_resource` | consumer-resource (MiCRM) | Ec for resource-mediated dynamics |
+| `simulations/stochastic_logistic` | stochastic logistic | Ec under intrinsic noise |
+| `simulations/network_effect` | interaction networks | dependence of Ec on network structure |
 | `simulations/short_sequence` | truncated/sparse series | robustness to short / sparse sampling |
 | `benchmarks/benchmark` | architecture study | VAE variants vs. AE / transformer baselines |
-| `experiments/lab_microbiome` | soil & water communities | E꜀ (CV), collapse prediction, community-shift & OLS forecasting |
-| `experiments/vaginal_microbiome` | vaginal microbiome | E꜀ across 24 subjects |
-| `experiments/Keio_community` | engineered FP populations (Keio strains) | E꜀ of measured growth dynamics |
+| `experiments/lab_microbiome` | soil & water communities | Ec (CV), collapse prediction, community-shift & OLS forecasting |
+| `experiments/vaginal_microbiome` | vaginal microbiome | Ec across 24 subjects |
+| `experiments/Keio_community` | engineered FP populations (Keio strains) | Ec of measured growth dynamics |
 
 > _Fill in the manuscript figure numbers for each row before release._
 
