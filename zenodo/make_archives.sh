@@ -25,7 +25,7 @@ EXCLUDES=(--exclude='*.mat' --exclude='*.pkl' --exclude='*_traindoc.pth'
   --exclude='simulations/VAE_gLV_simulation/vae_models/bgLV/I1/random_B98_T2_E*_trial1.pth')
 
 # tarball_name  <TAB>  space-separated source paths (repo-relative)
-read -r -d '' GROUPS <<'EOF' || true
+read -r -d '' GROUP_SPECS <<'EOF' || true
 glv_models	simulations/VAE_gLV_simulation/vae_models simulations/VAE_gLV_simulation/mlp_models
 glv_saved_sims	simulations/VAE_gLV_simulation/saved_sims
 glv_reconstruction	simulations/VAE_gLV_simulation/mlpvae_reconstruction
@@ -51,7 +51,7 @@ while IFS=$'\t' read -r name paths; do
   echo "==> $tarball  <=  ${existing[*]}"
   tar "${EXCLUDES[@]}" -czf "$tarball" "${existing[@]}"
   ( cd "$OUT" && sha256sum "${name}.tar.gz" >> "SHA256SUMS" )
-done <<< "$GROUPS"
+done <<< "$GROUP_SPECS"
 
 # Raw generator data whose paths contain spaces (handled explicitly, outside the
 # word-split GROUPS loop above).

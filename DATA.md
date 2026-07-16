@@ -6,14 +6,14 @@ and the small derived results needed to reproduce the paper figures (FUV caches 
 `*_embedding_FUV_CV/` and `saved_data/`, OLS-forecast outputs, `.mat` generation params,
 and the experimental train/test splits).
 
-**Zenodo DOI:** `10.5281/zenodo.XXXXXXX`  ← _fill in after publishing_
+**Zenodo DOI:** [10.5281/zenodo.21368291](https://doi.org/10.5281/zenodo.21368291)
 
 ## Restore the artifacts
 
 ```bash
 # from the repo root
-bash zenodo/zenodo_download.sh 10.5281/zenodo.XXXXXXX            # everything
-bash zenodo/zenodo_download.sh 10.5281/zenodo.XXXXXXX glv_models # a single tarball
+bash zenodo/zenodo_download.sh 10.5281/zenodo.21368291            # everything
+bash zenodo/zenodo_download.sh 10.5281/zenodo.21368291 glv_models # a single tarball
 ```
 
 Each tarball preserves repo-relative paths, so extraction restores every file to the

@@ -15,8 +15,8 @@ python zenodo/zenodo_upload.py               # creates a draft; --sandbox to tes
 
 ## Download (anyone reproducing the work)
 ```bash
-bash zenodo/zenodo_download.sh 10.5281/zenodo.XXXXXXX          # all artifacts
-bash zenodo/zenodo_download.sh 10.5281/zenodo.XXXXXXX glv_models   # just one tarball
+bash zenodo/zenodo_download.sh 10.5281/zenodo.21368291          # all artifacts
+bash zenodo/zenodo_download.sh 10.5281/zenodo.21368291 glv_models   # just one tarball
 ```
 
 `zenodo/archives/` is git-ignored — it only holds the local tarballs during upload/download.

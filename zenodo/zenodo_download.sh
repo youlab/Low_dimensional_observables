@@ -3,8 +3,8 @@
 # extract them back into their original folders so the notebooks can recompute results.
 #
 # Usage (from the repo root):
-#     bash zenodo/zenodo_download.sh 10.5281/zenodo.XXXXXXX          # all tarballs
-#     bash zenodo/zenodo_download.sh 10.5281/zenodo.XXXXXXX glv_models glv_saved_sims
+#     bash zenodo/zenodo_download.sh 10.5281/zenodo.21368291          # all tarballs
+#     bash zenodo/zenodo_download.sh 10.5281/zenodo.21368291 glv_models glv_saved_sims
 #
 # Pass a record DOI (or a bare record id). With no extra args it downloads every file
 # in the record; otherwise only the named tarballs (without the .tar.gz suffix).
