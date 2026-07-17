@@ -23,9 +23,13 @@ mkdir -p "$DEST"
 echo "Querying Zenodo record $RECORD_ID ..."
 API="https://zenodo.org/api/records/$RECORD_ID"
 # list files: name + download url
-mapfile -t FILES < <(python3 - "$API" "$@" <<'PY'
+# Read into an array with a while-loop (portable; macOS bash 3.2 has no `mapfile`).
+FILES=()
+while IFS= read -r line; do
+  [ -n "$line" ] && FILES+=("$line")
+done < <(python3 - "$API" "$@" <<'PY'
 import json, sys, urllib.request
-api, *want = sys.argv[1], sys.argv[2:]
+api, want = sys.argv[1], sys.argv[2:]
 data = json.load(urllib.request.urlopen(sys.argv[1]))
 for f in data.get("files", []):
     name = f.get("key") or f.get("filename")
@@ -36,6 +40,7 @@ for f in data.get("files", []):
 PY
 )
 
+[ "${#FILES[@]}" -eq 0 ] && { echo "No matching files found in record $RECORD_ID."; exit 1; }
 for line in "${FILES[@]}"; do
   name="${line%%$'\t'*}"; url="${line##*$'\t'}"
   echo "  downloading $name ..."
@@ -44,7 +49,14 @@ done
 
 if [ -f "$DEST/SHA256SUMS" ]; then
   echo "Verifying checksums ..."
-  ( cd "$DEST" && sha256sum -c --ignore-missing SHA256SUMS )
+  if command -v sha256sum >/dev/null 2>&1; then
+    ( cd "$DEST" && sha256sum -c --ignore-missing SHA256SUMS )
+  else
+    # macOS has no sha256sum; shasum -a 256 lacks --ignore-missing, so feed it only present files.
+    ( cd "$DEST" \
+      && while read -r sum name; do [ -f "$name" ] && printf '%s  %s\n' "$sum" "$name"; done < SHA256SUMS \
+      | shasum -a 256 -c - )
+  fi
 fi
 
 echo "Extracting into repo (paths are repo-relative) ..."
