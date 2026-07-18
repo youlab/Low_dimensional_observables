@@ -27,8 +27,21 @@ Standalone scripts characterizing the measured community from the amplicon data 
   ```bash
   python infer_correlation.py
   ```
-Both are verified to run under the project environment; figure-saving is disabled for the
-release (plots render interactively).
+- **`confirm_composition_correspondence.py`** — checks which composition column belongs to
+  which fluorescent protein, correlating each column against the named growth curves in
+  `saved_data/growth_curves/<FP>/<FP>_ground_truth.npy`.
+  ```bash
+  python confirm_composition_correspondence.py
+  ```
+All three are verified to run under the project environment.
+
+### Strain ordering
+The 62 columns of `sequence_composition.txt` follow the strain-barcode order of the
+amplicon pipeline, which for the four FP targets is **not** the manuscript K1–K4 order:
+columns 0–3 are mCherry (K4), EGFP (K1), mTagBFP2 (K2), LSSmOrange (K3). Both analysis
+scripts therefore apply `fp_col_order = [1, 2, 3, 0]` after loading, so k1–k4 in the
+figures mean EGFP, mTagBFP2, LSSmOrange, mCherry. Strains 5–62 are unaffected. The
+assignment is confirmed empirically by `confirm_composition_correspondence.py`.
 
 ## Data
 - **On Zenodo** (restore with `bash ../../zenodo/zenodo_download.sh <DOI>`; see [`../../DATA.md`](../../DATA.md)): `vae_models/`, `mlp_models/`
