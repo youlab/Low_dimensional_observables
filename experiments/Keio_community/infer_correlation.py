@@ -62,6 +62,19 @@ def pairwise_pearson_filter_zeros(data, taxon_names=None, min_samples=5, thresho
 
 composition = np.loadtxt('./sequenced_data/sequence_composition.txt')
 
+# NOTE -- column/channel permutation mismatch (see community_composition.py).
+# The first four columns of sequence_composition.txt are stored as
+#     col 0 -> mCherry, col 1 -> EGFP, col 2 -> mTagBFP2, col 3 -> LSSmOrange
+# which is not the fluorescence-channel order of sequenced_target_normal.npy
+# (channels 0-3 = EGFP, mTagBFP2, LSSmOrange, mCherry; `idx_FP_map` in
+# MLPVAE.py). Reorder the four target columns so K1-K4 in the heatmap and the
+# scatter panels correspond to EGFP, mTagBFP2, LSSmOrange, mCherry, matching the
+# strain ids used in community_composition.py. Correlations are computed per
+# column pair, so the r/p values are unchanged -- only the K labels move.
+# Verified by confirm_composition_correspondence.py.
+fp_col_order = [1, 2, 3, 0]
+composition = composition[:, fp_col_order + list(range(4, composition.shape[1]))]
+
 final_OD_normalized = np.load('./sequenced_data/sequenced_target_normal.npy')[:,4,-1]
 norm_factor = np.loadtxt("./sequenced_data/max_normalization.txt")[-1]
 OD_final = final_OD_normalized * norm_factor
@@ -155,7 +168,7 @@ cbar = fig2.colorbar(im, ax=ax2, shrink=0.6, ticks=[-1, -0.5, 0, 0.5, 1])
 cbar.set_label("Pearson r",fontsize=16)
 
 fig2.tight_layout()
-# fig2.savefig("./figures/correlation_heatmap.png", dpi=300)  # figure-saving disabled for release
+fig2.savefig("./figures/correlation_heatmap.png", dpi=300)
 
 target_taxa = np.arange(4)   # taxa 0,1,2,3 internally
 
@@ -180,65 +193,74 @@ print(f"max number of sig pairs among the 4 targets: {n_cols}")
 
 n_rows = 4
 
+panel_size = 1.5  # inches per panel (larger, "6x6"-style layout)
+
+grid_rows, grid_cols = 6, 6
+
 fig3, axes3 = plt.subplots(
-    n_rows,
-    n_cols,
-    figsize=(1.1 * n_cols, 1.1 * n_rows),
+    grid_rows, grid_cols,
+    figsize=(10,10),
 )
+tg_colors = ["#23A249","#74B3EB","#FF9000","#B53030"]
 
-for key, all_pairs in sig_pairs.items():
-    for k, pair in enumerate(all_pairs):
-        i, j, r, p, n = pair
-        ax3 = axes3[key,k]
+# Flatten all significant pairs into a single ordered list, then fill panels
+# sequentially (row by row) across the grid.
+all_pairs_flat = [pair for key in target_taxa if key in sig_pairs
+                  for pair in sig_pairs[key]]
 
-        x = absolute_abundance[:, j] # set the target abundances as the y axis
-        y = absolute_abundance[:, i]
+for idx, pair in enumerate(all_pairs_flat):
+    i, j, r, p, n = pair
+    ax3 = axes3.flat[idx]
 
-        mask = (x > threshold) & (y > threshold)
+    x = absolute_abundance[:, j] # set the target abundances as the y axis
+    y = absolute_abundance[:, i]
 
-        x_plot = x[mask]
-        y_plot = y[mask]
+    mask = (x > threshold) & (y > threshold)
 
-        x_plot = x_plot
-        y_plot = y_plot
+    x_plot = x[mask]
+    y_plot = y[mask]
 
-        ax3.scatter(x_plot, y_plot, s=20, alpha=0.8)
+    ax3.scatter(x_plot, y_plot, s=20, alpha=0.8, color=tg_colors[i])
 
-        slope, intercept = np.polyfit(x_plot, y_plot, 1)
+    slope, intercept = np.polyfit(x_plot, y_plot, 1)
 
-        x_line = np.linspace(x_plot.min(), x_plot.max(), 100)
-        y_line = slope * x_line + intercept
+    x_line = np.linspace(-3, 0, 100)
+    y_line = slope * x_line + intercept
 
-        ax3.plot(x_line, y_line, linewidth=1.5, c= 'k', zorder=10)
+    ax3.plot(x_line, y_line, linewidth=1.5, c= 'k', zorder=10)
 
-        ax3.set_xlim([-3,0])
-        ax3.set_ylim([-3,0])
-        
-        ax3.set_xticks([-3, -2, -1, 0])
-        ax3.set_yticks([-3, -2, -1, 0])
+    ax3.set_xlim([-3,0])
+    ax3.set_ylim([-3,0])
 
-        # only the bottom-left subplot keeps tick labels
-        if key == n_rows - 1 and k == 0:
-            ax3.set_xticklabels([-3, -2, -1, 0])
-            ax3.set_yticklabels([-3, -2, -1, 0])
-        else:
-            ax3.set_xticklabels([])
-            ax3.set_yticklabels([])
+    ax3.set_xticks([-3, -2, -1, 0])
+    ax3.set_yticks([-3, -2, -1, 0])
 
-        ax3.set_xlabel(rf"log$_{{10}}$K{j + 1}", fontsize=11,labelpad=0)
-        ax3.set_ylabel(rf"log$_{{10}}$K{i + 1}", fontsize=11, labelpad=0)
+    # only the first subplot keeps tick labels
+    if idx == 30:
+        ax3.set_xticklabels([r"10$^{-3}$", r"10$^{-2}$", r"10$^{-1}$", r"10$^{0}$"])
+        ax3.set_yticklabels([r"10$^{-3}$", r"10$^{-2}$", r"10$^{-1}$", r"10$^{0}$"])
+    else:
+        ax3.set_xticklabels([])
+        ax3.set_yticklabels([])
 
-        txt = f"r={r:.2f}\np={fmt_p(p)}\nn={n}"
-        ax3.text(x=0.9, y=0.9, s=txt, fontsize=10, ha='right', va='top',transform=ax3.transAxes,
-                bbox=dict(boxstyle='round,pad=0.2', facecolor='white', alpha=0.4, edgecolor='k'))
-        
-        ax3.set_aspect("equal", adjustable="box")
+    # ax3.set_xlabel(rf"log$_{{10}}$K{j + 1}", fontsize=11,labelpad=0)
+    # ax3.set_ylabel(rf"log$_{{10}}$K{i + 1}", fontsize=11, labelpad=0)
+    ax3.set_xlabel(rf"K{j + 1}", fontsize=11,labelpad=0)
+    ax3.set_ylabel(rf"K{i + 1}", fontsize=11, labelpad=0)
 
-    # Remove empty axes
-    for k in range(len(all_pairs), n_cols):
-        axes3[key,k].set_visible(False)
+    txt = f"r={r:.2f},  p={fmt_p(p)}"
+    ax3.set_title(txt, fontsize=11, pad=3)
 
-fig3.subplots_adjust(wspace=0.18,hspace=0.45,left=0.04,right=0.99,
-                     top=0.98,bottom=0.12)
-# fig3.savefig("./figures/target_correlations.png", dpi=300)  # figure-saving disabled for release
+    ax3.text(0.95, 0.95, f"n={n}", fontsize=11, ha='right', va='top',
+             transform=ax3.transAxes)
+
+    ax3.set_aspect("equal", adjustable="box")
+
+# Remove empty axes
+for idx in range(len(all_pairs_flat), axes3.size):
+    axes3.flat[idx].set_visible(False)
+
+fig3.subplots_adjust(wspace=0.3,hspace=0.3,left=0.06,right=0.99,
+                     top=0.95,bottom=0.1)
+fig3.savefig("./figures/target_correlations.png", dpi=300)
 plt.show()

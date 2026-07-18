@@ -6,6 +6,24 @@ from scipy.cluster.hierarchy import linkage, leaves_list
 data = np.loadtxt('./sequenced_data/sequence_composition.txt')
 target_keio = {0: "EGFP", 1: "mTagBFP2", 2: "LSSmOrange", 3: "mCherry"}# target keio strains that carries different fp plasmids
 tg_colors = ["#23A249","#74B3EB","#FF9000","#B53030"]
+
+# NOTE -- column/channel permutation mismatch.
+# The first four columns of sequence_composition.txt are NOT stored in the same
+# order as the fluorescence channels of sequenced_target_normal.npy (channels
+# 0-3 = EGFP, mTagBFP2, LSSmOrange, mCherry; see `idx_FP_map` in MLPVAE.py).
+# Correlating the reconstructed absolute abundances (composition x final OD, as
+# in infer_correlation.py) against the final-timepoint fluorescence identifies
+# the raw column order as
+#     col 0 -> mCherry, col 1 -> EGFP, col 2 -> mTagBFP2, col 3 -> LSSmOrange
+# For visuliazation purpose, reorder the four target columns here
+# so the plot follows the fluorescence-channel order given by `target_keio`.
+# Richness, inverse Simpson and Bray-Curtis are permutation invariant, so only
+# the stacked-bar colors and legend change.
+# Caution: infer_correlation.py indexes the RAW columns, so its K1-K4 labels
+# still refer to the unpermuted order.
+fp_col_order = [1, 2, 3, 0]
+data = data[:, fp_col_order + list(range(4, data.shape[1]))]
+
 # normalize rows to relative abundances if not already
 row_sums = data.sum(axis=1, keepdims=True)
 nonzero = row_sums.squeeze() > 0
