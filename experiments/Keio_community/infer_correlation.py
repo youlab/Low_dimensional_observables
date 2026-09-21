@@ -134,7 +134,7 @@ for i in range(4):
 print("-" * 56)
 print(f"  Mean freq of the 4 targets  : {np.nanmean(per_target_freqs):.3f}")
 print(f"  Sig pairs per target (mean+std) : "
-      f"{np.mean(per_target_counts):.1f} +/- {np.std(per_target_counts):.1f}")
+      f"{np.mean(per_target_counts):.1f} +/- {np.std(per_target_counts, ddof=1):.1f}")
 print("=" * 56)
 
 fig2, ax2 = plt.subplots(figsize=(5,5))
