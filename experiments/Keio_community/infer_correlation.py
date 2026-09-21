@@ -168,7 +168,7 @@ cbar = fig2.colorbar(im, ax=ax2, shrink=0.6, ticks=[-1, -0.5, 0, 0.5, 1])
 cbar.set_label("Pearson r",fontsize=16)
 
 fig2.tight_layout()
-fig2.savefig("./figures/correlation_heatmap.png", dpi=300)
+# fig2.savefig("./figures/correlation_heatmap.png", dpi=300)  # figure-saving disabled for release
 
 target_taxa = np.arange(4)   # taxa 0,1,2,3 internally
 
@@ -262,5 +262,5 @@ for idx in range(len(all_pairs_flat), axes3.size):
 
 fig3.subplots_adjust(wspace=0.3,hspace=0.3,left=0.06,right=0.99,
                      top=0.95,bottom=0.1)
-fig3.savefig("./figures/target_correlations.png", dpi=300)
+# fig3.savefig("./figures/target_correlations.png", dpi=300)  # figure-saving disabled for release
 plt.show()
