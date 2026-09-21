@@ -15,12 +15,12 @@ tg_colors = ["#23A249","#74B3EB","#FF9000","#B53030"]
 # in infer_correlation.py) against the final-timepoint fluorescence identifies
 # the raw column order as
 #     col 0 -> mCherry, col 1 -> EGFP, col 2 -> mTagBFP2, col 3 -> LSSmOrange
-# For visuliazation purpose, reorder the four target columns here
+# For visualization purposes, reorder the four target columns here
 # so the plot follows the fluorescence-channel order given by `target_keio`.
 # Richness, inverse Simpson and Bray-Curtis are permutation invariant, so only
 # the stacked-bar colors and legend change.
-# Caution: infer_correlation.py indexes the RAW columns, so its K1-K4 labels
-# still refer to the unpermuted order.
+# infer_correlation.py applies the same reorder, so K1-K4 refer to the same
+# strains in both scripts.
 fp_col_order = [1, 2, 3, 0]
 data = data[:, fp_col_order + list(range(4, data.shape[1]))]
 
