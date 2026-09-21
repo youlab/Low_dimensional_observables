@@ -71,7 +71,7 @@ composition = np.loadtxt('./sequenced_data/sequence_composition.txt')
 # scatter panels correspond to EGFP, mTagBFP2, LSSmOrange, mCherry, matching the
 # strain ids used in community_composition.py. Correlations are computed per
 # column pair, so the r/p values are unchanged -- only the K labels move.
-# Verified by confirm_composition_correspondence.py.
+# Verified by confirm_composition_correspondence.py (not included in the repository).
 fp_col_order = [1, 2, 3, 0]
 composition = composition[:, fp_col_order + list(range(4, composition.shape[1]))]
 
