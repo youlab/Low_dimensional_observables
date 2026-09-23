@@ -45,6 +45,7 @@ figures/
 #  Caches / OS / scheduler cruft
 # ============================================================================
 __pycache__/
+.claude/
 *.py[cod]
 .DS_Store
 .ipynb_checkpoints/
