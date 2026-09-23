@@ -60,6 +60,15 @@ zenodo/make_archives.log
 simulation_code/network sparsity/random_init.txt
 
 # ============================================================================
+#  Vaginal full-data retrain chain — kept in the working folder for provenance
+#  but not part of the release: nothing reads the resulting T1_E*_full.pth
+#  (Vaginal_microbiome_Ec_CV.ipynb uses only the per-fold CV models).
+# ============================================================================
+experiments/vaginal_microbiome/VAE_all_24subjects.py
+experiments/vaginal_microbiome/Retrain_vag_microbiome_Ec.py
+experiments/vaginal_microbiome/retrain_vag_full.sh
+
+# ============================================================================
 #  bgLV in-repo training example (I1 / T2 / random, trial 1) — kept in git so
 #  `train_bgLV_simulations.py 1 100 2 random 1` runs end-to-end without Zenodo.
 #  (Negations come after all ignore rules above, so they win.)
