@@ -6,10 +6,10 @@ Cross-validated VAE analysis of measured soil and water communities: effective o
 `VAE_lab_microbiome_CV.py`
 
 ## Run order
-1. `VAE_lab_microbiome_CV.py` / `Train_lab_microbiome_CV.py` — train cross-validated VAEs; `VAE_lab_microbiome_full.py` / `Retrain_lab_microbiome.py` for full-data models (`retrain_full_VAE.sh`).
+1. `VAE_lab_microbiome_CV.py` / `Train_lab_microbiome_CV.py` — train cross-validated VAEs (`sbatch train_lab_CV.sh <SAMPLE> <N_TARGET>` sweeps the 8 held-out replicates × 3 trials); `VAE_lab_microbiome_full.py` / `Retrain_lab_microbiome.py` for full-data models (`retrain_full_VAE.sh`).
 2. `LabMicrobiome_Ec_CV.ipynb` — Eᴄ / FUV figures (reads `lab_microbiome_embedding_FUV_CV/` caches; recompute needs the CV models from Zenodo).
 3. `MLP_collapse_prediction.py` (`train_mlp_collapse.sh`) + `MLP_commshift.ipynb` — collapse prediction & community shift.
-4. `OLS_raw_forecast.ipynb` / `OLS_delta_forecast.ipynb` (+ `plot_*_allmedia.py`) — OLS forecasting; outputs in `target_forecast_OLS_regression_raw/`, `delta_forecast_OLS/`.
+4. `OLS_raw_forecast.ipynb` / `OLS_delta_forecast.ipynb` — OLS forecasting; outputs in `target_forecast_OLS_regression_raw/`, `delta_forecast_OLS/`.
 
 ## Data
 - **On Zenodo** (restore with `bash ../../zenodo/zenodo_download.sh <DOI>`; see [`../../DATA.md`](../../DATA.md)): `vae_models_CV/`, `mlp_models/` (collapse weights), `lab_microbiome_datasets_CV/`
