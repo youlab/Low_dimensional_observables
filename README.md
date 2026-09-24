@@ -1,6 +1,6 @@
 # Low-dimensional observables of ecological dynamics
 
-2026/09 release: DOI: 10.5281/zenodo.22921689
+DOI (all versions, resolves to the latest release): [10.5281/zenodo.21386382](https://doi.org/10.5281/zenodo.21386382)
 
 Code and analysis notebooks for the manuscript **Linear scaling reveals low-dimensional structure in observable microbial dynamics**. A VAE is trained to
 compress high-dimensional observable trajectories into a small latent embedding; the
