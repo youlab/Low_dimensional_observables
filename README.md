@@ -52,7 +52,7 @@ are archived on Zenodo** — see [`DATA.md`](DATA.md).
 - **Reproduce the published FUV / embedding-dimension figures:** no download needed — run
   the `Summary_*` notebooks, which read the in-repo caches.
 - **Re-train models or recompute reconstructions from scratch:** restore the artifacts with
-  `bash zenodo/zenodo_download.sh <DOI>` first.
+  `bash zenodo/zenodo_download.sh 10.5281/zenodo.21368291` first.
 
 ## System → analysis map
 
