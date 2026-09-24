@@ -2,11 +2,10 @@
 
 2026/09 release: DOI: 10.5281/zenodo.22921689
 
-Code and analysis notebooks for learning **low-dimensional observables of ecological and
-microbial community dynamics with variational autoencoders (VAEs)**. A VAE is trained to
-compress high-dimensional community trajectories into a small latent embedding; the
+Code and analysis notebooks for the manuscript **Linear scaling reveals low-dimensional structure in observable microbial dynamics**. A VAE is trained to
+compress high-dimensional observable trajectories into a small latent embedding; the
 minimum embedding dimension that reconstructs the dynamics (measured by the fraction of
-unexplained variance, **FUV**) is the effective number of observables — the *Ec* — of the
+unexplained variance, **FUV**) is the operational compression dimension of observables — the *Ec* — of the
 system.
 
 This repository accompanies the manuscript and reproduces every figure. It is organized as
@@ -68,8 +67,6 @@ are archived on Zenodo** — see [`DATA.md`](DATA.md).
 | `experiments/lab_microbiome` | soil & water communities | Ec (CV), collapse prediction, community-shift & OLS forecasting |
 | `experiments/vaginal_microbiome` | vaginal microbiome | Ec across 24 subjects |
 | `experiments/Keio_community` | engineered FP populations (Keio strains) | Ec of measured growth dynamics |
-
-> _Fill in the manuscript figure numbers for each row before release._
 
 ## Citing
 
